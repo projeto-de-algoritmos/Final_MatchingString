@@ -76,16 +76,34 @@ function filterByDistance(options, value) {
   }
 
   array = mergeSort(array)
+  let newOptions = []
   
   for (i = 0; i < options.length; i++) {
-    options[i] = array[i].string
+    console.log(array[i].distance >= Math.max(array[i].string.length, value.length))
+    if (array[i].distance < Math.max(array[i].string.length, value.length)){
+      newOptions.push(array[i].string)
+    }
   }
 
-  return options
+  return newOptions
+}
+
+async function getCities(){
+  let cities = []
+
+  await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/distritos")
+  .then((response) =>{
+    return response.json()
+  }).then((response) => {
+    cities = response
+  })
+
+  console.log(cities)
 }
 
 function App() {
-  console.log(filterByDistance(["Aba", "Abacate", "Abril", "Aberto", "Alberto"], "Arba"))
+  console.log(filterByDistance(["Aba", "Abacate", "Abril", "Aberto", "Alberto", "Vei"], "Arba"))
+  // console.log(getCities())
   const [value, setValue] = useState("")
   const [options, setOptions] = useState([])
   return (
