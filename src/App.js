@@ -34,7 +34,7 @@ function editDistance(a, b) {
   return matrix[a.length][b.length]
 }
 
-function compare(a, b){
+function compare(a, b) {
   if (a.distance < b.distance) return true
   if (a.distance == b.distance && a.string < b.string) return true
   return false
@@ -65,51 +65,64 @@ function mergeSort(array) {
   return merge(mergeSort(array), mergeSort(array2))
 }
 
-function filterByDistance(options, value) {
+function filterByDistance(options, value, setList) {
   let array = [], i;
 
   for (i = 0; i < options.length; i++) {
     array[i] = {
-      string: options[i],
-      distance: editDistance(options[i], value)
+      string: String(options[i]),
+      distance: editDistance(String(options[i]), String(value))
     }
   }
 
   array = mergeSort(array)
   let newOptions = []
-  
+
   for (i = 0; i < options.length; i++) {
-    console.log(array[i].distance >= Math.max(array[i].string.length, value.length))
-    if (array[i].distance < Math.max(array[i].string.length, value.length)){
+    if (value == undefined) console.log(i)
+    if (array[i].distance < Math.max(array[i].string.length, value.length)) {
       newOptions.push(array[i].string)
     }
   }
 
-  return newOptions
+  newOptions = newOptions.splice(0, 20)
+  setList(newOptions)
 }
 
-async function getCities(){
+async function getCities(setOptions) {
   let cities = []
 
   await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/distritos")
-  .then((response) =>{
-    return response.json()
-  }).then((response) => {
-    cities = response
-  })
+    .then((response) => {
+      return response.json()
+    }).then((response) => {
+      cities = response
+    })
 
-  console.log(cities)
+  cities = cities.map(value => value.nome)
+  setOptions(cities)
 }
 
 function App() {
-  console.log(filterByDistance(["Aba", "Abacate", "Abril", "Aberto", "Alberto", "Vei"], "Arba"))
-  // console.log(getCities())
   const [value, setValue] = useState("")
-  const [options, setOptions] = useState([])
+  const [options, setOptions] = useState(["a", "b", "c", "aa", "ab", "abar"])
+  const [list, setList] = useState(["Algo"])
+
+  getCities(setOptions)
+
   return (
     <div>
-      <input type="text" value={value} onChange={() => setValue()}></input>
-      <text>{"Aba"}</text>
+      <input type="text" value={value} onChange={(event) => {
+        setValue(event.target.value)
+        filterByDistance(options, event.target.value, setList)
+      }}></input>
+      <div>
+        {list.map((value, index) => {
+          return (
+            <text key={index}>{value}</text>
+          )
+        })}
+      </div>
     </div>
   );
 }
