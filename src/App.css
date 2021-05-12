@@ -1,0 +1,107 @@
+@font-face {
+    font-family: "Product Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Open Sans"), local("OpenSans"),
+      url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2)
+        format("woff2");
+  }
+  
+  * {
+      box-sizing: border-box;
+  }
+  
+  html,
+  body,
+  #root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: "Product Sans";
+  }
+  
+  .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+  }
+  
+  .container h1 {
+    font-size: 4.4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  
+  .container .contentContainer {
+      width: 90%;
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 10px 10px 10px rgba(1, 1, 1, 0.2);
+      border-radius: 20px 20px 0 0;
+      margin-bottom: 4rem;
+  }
+  
+  .container #inputWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid #dadce0;
+    border-bottom: 0;
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    height: 38px;
+  }
+  
+  .container #inputWrapper .searchIcon {
+    position: absolute;
+    margin-left: 15px;
+  }
+  
+  .container #inputWrapper input {
+    border: 0;
+    outline: none !important;
+    padding-left: 2.5rem;
+    height: 90%;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+  }
+  
+  .container .listContainer {
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #dadce0;
+    border-top: 0;
+  }
+  
+  .container .listContainer .listItem {
+      padding: 0.4rem;
+      padding-left: 2.5rem;
+      width: 100%;
+  }
+  
+  .container .listContainer .listItem:hover {
+      background-color: rgba(1, 1, 1, 0.1);
+  }
+  
+  .textGreen {
+      color: #0F9D58;
+  }
+  
+  .textBlue {
+      color: #4285F4
+  }
+  
+  .textRed {
+      color: #DB4437;
+  }
+  
+  .textYellow {
+      color: #F4B400;
+  }
